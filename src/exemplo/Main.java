@@ -8,20 +8,24 @@ import exemplo.classes.AvatarA;
 import exemplo.classes.AvatarB;
 import exemplo.classes.AvatarC;
 import exemplo.classes.AvatarD;
+import exemplo.classes.FactoryFlyweight;
 import exemplo.classes.IAvatar;
 
 public class Main {
 
+	private static FactoryFlyweight fabrica = new FactoryFlyweight();
+	private static int recriado = 0;
+	
 	public static void main(String[] args) {
 		
 		TimerTask timerTask = new TimerTask() { 
 		    public void run() { 
 		    	long tempoI = System.currentTimeMillis();
-		        Main.recriarMapa();
+		        recriarMapa();
 		        long tempoF = System.currentTimeMillis();
-		        long total = (tempoF - tempoI) / 1000;
+		        double total = (tempoF - tempoI) / 1000;
 		        System.out.println("Demorou: " + total + "segundos");
-		        
+		        System.out.println("Mapa criado pela " + ++recriado + " vez");
 		    } 
 		}; 
 
@@ -43,13 +47,7 @@ public class Main {
 				int selecionadoPosicao = random.nextInt(avatares.length);
 				String selecionado = avatares[selecionadoPosicao];
 				
-				IAvatar avatar;
-				switch (selecionado) {
-					case "A": avatar = new AvatarA(); break;
-					case "B": avatar = new AvatarB(); break;
-					case "C": avatar = new AvatarC(); break;
-					default: avatar = new AvatarD(); break;
-				}
+				IAvatar avatar = fabrica.getAvatar(selecionado);
 				//Exibe avatar na posição X e Y
 				avatar.exibeImagem(x, y);
 			}
