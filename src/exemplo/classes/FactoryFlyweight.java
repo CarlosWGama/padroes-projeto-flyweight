@@ -1,11 +1,11 @@
 package exemplo.classes;
 
 import java.util.HashMap;
-import java.util.Map;
+
 
 public class FactoryFlyweight {
 
-	private Map<String, IAvatar> avatares = new HashMap<String, IAvatar>();
+	private HashMap<String, IAvatar> avatares = new HashMap<String, IAvatar>();
 	
 	public IAvatar getAvatar(String chave) {
 		
@@ -24,6 +24,5 @@ public class FactoryFlyweight {
 		}
 		
 		return avatar;
-	}
-	
+	}	
 }
